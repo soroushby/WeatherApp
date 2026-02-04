@@ -108,29 +108,29 @@ const HomePage = () => {
     <div className="min-h-screen bg-gradient-to-b from-dark-900 to-dark-800">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-dark-900/80 backdrop-blur-md border-b border-dark-600">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2 flex-shrink-0">
               <div className="w-8 h-8 rounded-lg bg-primary-500 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">W</span>
               </div>
-              <span className="text-xl font-bold text-white hidden sm:inline">
+              <span className="text-xl font-bold text-white hidden md:inline">
                 WeatherNow
               </span>
             </Link>
 
             {/* Search bar */}
-            <div className="flex-1 max-w-xl">
+            <div className="flex-1 min-w-0 max-w-xl">
               <SearchBar onSearch={handleSearch} />
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <TemperatureToggle unit={unit} onToggle={handleUnitToggle} />
               <Link
                 to="/favorites"
-                className="p-2 text-gray-400 hover:text-yellow-400 transition-colors"
+                className="p-2 text-gray-400 hover:text-yellow-400 active:text-yellow-400 transition-colors"
                 aria-label="Favorites"
               >
                 <Star className="w-5 h-5" />
@@ -141,7 +141,7 @@ const HomePage = () => {
       </header>
 
       {/* Main content */}
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Location status */}
         {isLocating && (
           <div className="flex items-center justify-center gap-3 py-8">

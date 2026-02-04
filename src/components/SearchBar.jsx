@@ -146,11 +146,11 @@ const SearchBar = ({ onSearch, initialValue = '' }) => {
       <form onSubmit={handleSubmit}>
         <div className="relative">
           {/* Search icon */}
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+          <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none">
             {isLoading ? (
-              <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
+              <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 animate-spin" />
             ) : (
-              <Search className="w-5 h-5 text-gray-400" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
             )}
           </div>
 
@@ -165,9 +165,9 @@ const SearchBar = ({ onSearch, initialValue = '' }) => {
             }}
             onFocus={() => setIsFocused(true)}
             onKeyDown={handleKeyDown}
-            placeholder="Search for a city..."
-            className="w-full h-14 pl-12 pr-12 bg-dark-700/80 backdrop-blur-sm
-                       border border-dark-500 rounded-xl text-white
+            placeholder="Search city..."
+            className="w-full h-10 sm:h-14 pl-9 sm:pl-12 pr-9 sm:pr-12 bg-dark-700/80 backdrop-blur-sm
+                       border border-dark-500 rounded-lg sm:rounded-xl text-white text-sm sm:text-base
                        placeholder:text-gray-500 focus:outline-none
                        focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
                        transition-all duration-200"
@@ -181,11 +181,11 @@ const SearchBar = ({ onSearch, initialValue = '' }) => {
             <button
               type="button"
               onClick={handleClear}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-1
-                         text-gray-400 hover:text-white transition-colors"
+              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1
+                         text-gray-400 hover:text-white active:text-white transition-colors"
               aria-label="Clear search"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
         </div>
@@ -195,34 +195,34 @@ const SearchBar = ({ onSearch, initialValue = '' }) => {
       {showDropdown && (
         <div
           ref={dropdownRef}
-          className="absolute top-full left-0 right-0 mt-2 py-2 bg-dark-700
-                     border border-dark-500 rounded-xl shadow-xl z-50
-                     max-h-80 overflow-y-auto animate-fade-in"
+          className="absolute top-full left-0 right-0 mt-1 sm:mt-2 py-1 sm:py-2 bg-dark-700
+                     border border-dark-500 rounded-lg sm:rounded-xl shadow-xl z-50
+                     max-h-64 sm:max-h-80 overflow-y-auto animate-fade-in"
           role="listbox"
         >
           {/* Search suggestions */}
           {suggestions.length > 0 && (
             <>
-              <div className="px-4 py-2 text-xs font-medium text-gray-500 uppercase">
+              <div className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-medium text-gray-500 uppercase">
                 Suggestions
               </div>
               {suggestions.map((city, index) => (
                 <button
                   key={`${city.name}-${city.lat}-${city.lon}`}
                   onClick={() => handleSelectCity(city.name)}
-                  className={`w-full px-4 py-3 flex items-center gap-3 text-left
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 text-left
                               transition-colors ${
                                 selectedIndex === index
                                   ? 'bg-primary-500/20 text-white'
-                                  : 'text-gray-300 hover:bg-dark-600'
+                                  : 'text-gray-300 hover:bg-dark-600 active:bg-dark-600'
                               }`}
                   role="option"
                   aria-selected={selectedIndex === index}
                 >
                   <MapPin className="w-4 h-4 text-primary-400 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="font-medium">{city.name}</span>
-                    <span className="text-gray-500">
+                    <span className="text-gray-500 text-sm">
                       {city.state ? `, ${city.state}` : ''}, {city.country}
                     </span>
                   </div>
@@ -234,31 +234,31 @@ const SearchBar = ({ onSearch, initialValue = '' }) => {
           {/* Search history (only when no query) */}
           {query.length === 0 && history.length > 0 && (
             <>
-              <div className="px-4 py-2 text-xs font-medium text-gray-500 uppercase">
+              <div className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-medium text-gray-500 uppercase">
                 Recent Searches
               </div>
               {history.map((item, index) => (
                 <div
                   key={item}
-                  className={`w-full px-4 py-3 flex items-center gap-3
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3
                               transition-colors ${
                                 selectedIndex === index
                                   ? 'bg-primary-500/20'
-                                  : 'hover:bg-dark-600'
+                                  : 'hover:bg-dark-600 active:bg-dark-600'
                               }`}
                 >
                   <button
                     onClick={() => handleSelectCity(item)}
-                    className="flex items-center gap-3 flex-1 text-left text-gray-300"
+                    className="flex items-center gap-2 sm:gap-3 flex-1 text-left text-gray-300 min-w-0"
                     role="option"
                     aria-selected={selectedIndex === index}
                   >
                     <Clock className="w-4 h-4 text-gray-500 flex-shrink-0" />
-                    <span>{item}</span>
+                    <span className="truncate">{item}</span>
                   </button>
                   <button
                     onClick={(e) => handleRemoveHistory(e, item)}
-                    className="p-1 text-gray-500 hover:text-white transition-colors"
+                    className="p-1.5 text-gray-500 hover:text-white active:text-white transition-colors flex-shrink-0"
                     aria-label={`Remove ${item} from history`}
                   >
                     <X className="w-4 h-4" />

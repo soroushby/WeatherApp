@@ -67,37 +67,37 @@ const CityPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-dark-900 to-dark-800">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-dark-900/80 backdrop-blur-md border-b border-dark-600">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Back button */}
             <button
               onClick={() => navigate({ to: '/' })}
-              className="p-2 text-gray-400 hover:text-white hover:bg-dark-700
-                         rounded-lg transition-colors"
+              className="p-2 text-gray-400 hover:text-white active:text-white hover:bg-dark-700
+                         rounded-lg transition-colors flex-shrink-0"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
 
             {/* Search bar */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <SearchBar onSearch={handleSearch} initialValue={decodedCity} />
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <TemperatureToggle unit={unit} onToggle={handleUnitToggle} />
               <button
                 onClick={refetch}
-                className="p-2 text-gray-400 hover:text-white hover:bg-dark-700
-                           rounded-lg transition-colors"
+                className="p-2 text-gray-400 hover:text-white active:text-white hover:bg-dark-700
+                           rounded-lg transition-colors hidden sm:block"
                 aria-label="Refresh weather"
               >
                 <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
               </button>
               <Link
                 to="/favorites"
-                className="p-2 text-gray-400 hover:text-yellow-400 transition-colors"
+                className="p-2 text-gray-400 hover:text-yellow-400 active:text-yellow-400 transition-colors"
                 aria-label="Favorites"
               >
                 <Star className="w-5 h-5" />
@@ -108,7 +108,7 @@ const CityPage = () => {
       </header>
 
       {/* Main content */}
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Error message */}
         {error && (
           <ErrorMessage error={error} onRetry={refetch} />

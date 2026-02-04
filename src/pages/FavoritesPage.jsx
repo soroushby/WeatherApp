@@ -39,20 +39,20 @@ const FavoritesPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-dark-900 to-dark-800">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-dark-900/80 backdrop-blur-md border-b border-dark-600">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Back button */}
             <button
               onClick={() => navigate({ to: '/' })}
-              className="p-2 text-gray-400 hover:text-white hover:bg-dark-700
-                         rounded-lg transition-colors"
+              className="p-2 text-gray-400 hover:text-white active:text-white hover:bg-dark-700
+                         rounded-lg transition-colors flex-shrink-0"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
 
             {/* Title */}
-            <h1 className="text-xl font-bold text-white flex items-center gap-2">
+            <h1 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
               <Star className="w-5 h-5 text-yellow-400" />
               Favorites
             </h1>
@@ -67,19 +67,19 @@ const FavoritesPage = () => {
       </header>
 
       {/* Main content */}
-      <main className="max-w-4xl mx-auto px-4 py-6">
+      <main className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
         {/* Search bar for adding new favorites */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <SearchBar onSearch={handleSearch} />
         </div>
 
         {/* Favorites count */}
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-gray-400">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <p className="text-gray-400 text-sm sm:text-base">
             {favorites.length} of 10 favorites
           </p>
           {favorites.length < 10 && (
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">
               Search and add cities to favorites
             </p>
           )}
@@ -110,7 +110,7 @@ const FavoritesPage = () => {
 
         {/* Favorites grid */}
         {favorites.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {favorites.map((fav) => (
               <FavoriteItem
                 key={fav.name}
@@ -167,15 +167,15 @@ const FavoriteItem = ({ city, unit, onRemove }) => {
         onClick={() => navigate({ to: '/city/$cityName', params: { cityName: city.name } })}
       />
 
-      {/* Remove button overlay */}
+      {/* Remove button overlay - always visible on mobile, hover on desktop */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           onRemove();
         }}
-        className="absolute top-2 right-2 p-2 bg-dark-800/80 text-gray-400
-                   hover:text-red-400 hover:bg-dark-700 rounded-lg
-                   opacity-0 group-hover:opacity-100 transition-all duration-200"
+        className="absolute top-2 right-2 p-2 bg-dark-800/90 text-gray-400
+                   hover:text-red-400 active:text-red-400 hover:bg-dark-700 rounded-lg
+                   opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200"
         aria-label={`Remove ${city.name} from favorites`}
       >
         <Trash2 className="w-4 h-4" />

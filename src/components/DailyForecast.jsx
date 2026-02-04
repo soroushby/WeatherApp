@@ -67,12 +67,12 @@ const DailyForecast = ({ forecast, unit = 'C' }) => {
   if (!forecast || forecast.length === 0) return null;
 
   return (
-    <div className="glass-card p-4 md:p-6 animate-fade-in">
-      <h3 className="text-lg font-semibold text-white mb-4">
+    <div className="glass-card p-3 sm:p-4 md:p-6 animate-fade-in">
+      <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
         5-Day Forecast
       </h3>
 
-      <div className="space-y-2">
+      <div className="space-y-1.5 sm:space-y-2">
         {forecast.map((day, index) => {
           const WeatherIcon = getWeatherIcon(day.icon);
           const iconColor = getIconColor(day.icon);
@@ -81,14 +81,14 @@ const DailyForecast = ({ forecast, unit = 'C' }) => {
           return (
             <div
               key={day.date}
-              className={`flex items-center justify-between p-3 md:p-4 rounded-xl
-                         transition-all duration-200 hover:bg-dark-600
+              className={`flex items-center justify-between p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl
+                         transition-all duration-200 active:bg-dark-600 hover:bg-dark-600
                          ${today ? 'bg-primary-500/10 border border-primary-500/20' : 'bg-dark-700/50'}`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Day name */}
               <div className="flex-1 min-w-0">
-                <span className={`font-medium ${today ? 'text-primary-400' : 'text-white'}`}>
+                <span className={`text-sm sm:text-base font-medium ${today ? 'text-primary-400' : 'text-white'}`}>
                   {today ? 'Today' : day.date.split(',')[0]}
                 </span>
                 <span className="hidden sm:inline text-gray-500 text-sm ml-2">
@@ -97,11 +97,11 @@ const DailyForecast = ({ forecast, unit = 'C' }) => {
               </div>
 
               {/* Precipitation chance */}
-              <div className="flex items-center gap-1 w-16 justify-center">
+              <div className="flex items-center gap-1 w-12 sm:w-16 justify-center">
                 {day.pop > 0 && (
                   <>
-                    <Droplets className="w-4 h-4 text-weather-rainy" />
-                    <span className="text-sm text-weather-rainy">
+                    <Droplets className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-weather-rainy" />
+                    <span className="text-xs sm:text-sm text-weather-rainy">
                       {day.pop}%
                     </span>
                   </>
@@ -109,20 +109,20 @@ const DailyForecast = ({ forecast, unit = 'C' }) => {
               </div>
 
               {/* Weather icon and condition */}
-              <div className="flex items-center gap-2 w-24 md:w-32 justify-center">
-                <WeatherIcon className={`w-6 h-6 ${iconColor}`} />
+              <div className="flex items-center gap-2 w-8 sm:w-24 md:w-32 justify-center">
+                <WeatherIcon className={`w-5 h-5 sm:w-6 sm:h-6 ${iconColor}`} />
                 <span className="hidden md:inline text-gray-400 text-sm capitalize truncate">
                   {day.condition}
                 </span>
               </div>
 
               {/* Temperature range */}
-              <div className="flex items-center gap-2 w-28 justify-end">
-                <span className="text-white font-semibold">
+              <div className="flex items-center gap-1 sm:gap-2 w-20 sm:w-28 justify-end">
+                <span className="text-white font-semibold text-sm sm:text-base">
                   {formatTemp(day.tempMax, unit)}
                 </span>
-                <span className="text-gray-500">/</span>
-                <span className="text-gray-400">
+                <span className="text-gray-500 text-sm">/</span>
+                <span className="text-gray-400 text-sm sm:text-base">
                   {formatTemp(day.tempMin, unit)}
                 </span>
               </div>

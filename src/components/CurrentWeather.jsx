@@ -101,11 +101,11 @@ const CurrentWeather = ({ weather, unit = 'C', showFavorite = true }) => {
   const sunsetTime = formatTime(weather.sunset);
 
   return (
-    <div className={`glass-card p-6 md:p-8 animate-fade-in-up ${colors.glow}`}>
+    <div className={`glass-card p-4 sm:p-6 md:p-8 animate-fade-in-up ${colors.glow}`}>
       {/* Header with city name and favorite button */}
-      <div className="flex justify-between items-start mb-6">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white">
+      <div className="flex justify-between items-start mb-4 sm:mb-6">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white truncate">
             {weather.city}
           </h2>
           <p className="text-gray-400 text-sm md:text-base">
@@ -125,19 +125,19 @@ const CurrentWeather = ({ weather, unit = 'C', showFavorite = true }) => {
       </div>
 
       {/* Main temperature and icon */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4 md:gap-6">
+      <div className="flex items-center justify-between mb-6 sm:mb-8">
+        <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
           {/* Weather icon with animation */}
-          <div className={`p-4 md:p-6 rounded-full ${colors.bg} ${colors.border} border animate-weather-float`}>
-            <WeatherIcon className={`w-12 h-12 md:w-16 md:h-16 ${colors.icon}`} />
+          <div className={`p-3 sm:p-4 md:p-6 rounded-full ${colors.bg} ${colors.border} border animate-weather-float`}>
+            <WeatherIcon className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 ${colors.icon}`} />
           </div>
 
           {/* Temperature */}
           <div>
-            <div className="text-5xl md:text-7xl font-bold text-white">
+            <div className="text-4xl sm:text-5xl md:text-7xl font-bold text-white">
               {formatTemp(weather.temp, unit)}
             </div>
-            <p className="text-gray-400 text-sm md:text-base capitalize">
+            <p className="text-gray-400 text-xs sm:text-sm md:text-base capitalize">
               {weather.description}
             </p>
           </div>
@@ -150,6 +150,12 @@ const CurrentWeather = ({ weather, unit = 'C', showFavorite = true }) => {
             {formatTemp(weather.feelsLike, unit)}
           </p>
         </div>
+      </div>
+
+      {/* Feels like on mobile */}
+      <div className="sm:hidden mb-4 p-3 bg-dark-700/50 rounded-lg flex items-center justify-between">
+        <span className="text-gray-400 text-sm">Feels like</span>
+        <span className="text-white font-semibold text-lg">{formatTemp(weather.feelsLike, unit)}</span>
       </div>
 
       {/* Weather details grid */}
@@ -194,31 +200,34 @@ const CurrentWeather = ({ weather, unit = 'C', showFavorite = true }) => {
       </div>
 
       {/* Sunrise and Sunset */}
-      <div className="flex justify-between items-center mt-6 pt-6 border-t border-dark-500">
-        <div className="flex items-center gap-3">
-          <Sunrise className="w-5 h-5 text-weather-sunny" />
-          <div>
-            <p className="text-xs text-gray-500">Sunrise</p>
-            <p className="text-white font-medium">{sunriseTime}</p>
+      <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-dark-500">
+        {/* Mobile: Stack vertically, Desktop: Horizontal */}
+        <div className="grid grid-cols-3 gap-2 sm:flex sm:justify-between sm:items-center">
+          <div className="flex flex-col sm:flex-row items-center sm:gap-3 text-center sm:text-left">
+            <Sunrise className="w-5 h-5 text-weather-sunny mb-1 sm:mb-0" />
+            <div>
+              <p className="text-xs text-gray-500">Sunrise</p>
+              <p className="text-white font-medium text-sm sm:text-base">{sunriseTime}</p>
+            </div>
           </div>
-        </div>
 
-        {/* High/Low temperatures */}
-        <div className="flex items-center gap-3">
-          <Thermometer className="w-5 h-5 text-primary-400" />
-          <div className="text-center">
-            <p className="text-xs text-gray-500">High / Low</p>
-            <p className="text-white font-medium">
-              {formatTemp(weather.tempMax, unit)} / {formatTemp(weather.tempMin, unit)}
-            </p>
+          {/* High/Low temperatures */}
+          <div className="flex flex-col sm:flex-row items-center sm:gap-3 text-center">
+            <Thermometer className="w-5 h-5 text-primary-400 mb-1 sm:mb-0" />
+            <div>
+              <p className="text-xs text-gray-500">High / Low</p>
+              <p className="text-white font-medium text-sm sm:text-base">
+                {formatTemp(weather.tempMax, unit)} / {formatTemp(weather.tempMin, unit)}
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center gap-3">
-          <Sunset className="w-5 h-5 text-weather-sunny" />
-          <div className="text-right">
-            <p className="text-xs text-gray-500">Sunset</p>
-            <p className="text-white font-medium">{sunsetTime}</p>
+          <div className="flex flex-col sm:flex-row items-center sm:gap-3 text-center sm:text-right">
+            <Sunset className="w-5 h-5 text-weather-sunny mb-1 sm:mb-0" />
+            <div>
+              <p className="text-xs text-gray-500">Sunset</p>
+              <p className="text-white font-medium text-sm sm:text-base">{sunsetTime}</p>
+            </div>
           </div>
         </div>
       </div>
