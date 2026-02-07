@@ -3,6 +3,7 @@ import {
   createRouter,
   createRootRoute,
   createRoute,
+  createHashHistory,
   Outlet,
 } from '@tanstack/react-router';
 import LoadingSkeleton from './components/LoadingSkeleton';
@@ -73,9 +74,12 @@ const routeTree = rootRoute.addChildren([
   favoritesRoute,
 ]);
 
+// Use hash-based routing for GitHub Pages compatibility
+const hashHistory = createHashHistory();
+
 // Create and export router
 export const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
-  basepath: '/WeatherApp',
+  history: hashHistory,
 });
